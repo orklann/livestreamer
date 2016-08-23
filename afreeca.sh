@@ -111,6 +111,6 @@ while true; do
     echo ""
     continue
   fi
-  echo "Playing" ${players[$INPUT]}"..."
-  livestreamer --loglevel=error --player="/usr/bin/vlc --file-caching=5000 --network-caching=5000 --meta-title=$INPUT" afreeca.com/${players[$INPUT]}
+  echo "Starting " ${players[$INPUT]}"..."
+  livestreamer --loglevel=error --player="/usr/bin/vlc --file-caching=5000 --network-caching=5000 --meta-title=$INPUT" afreeca.com/${players[$INPUT]} &
 done
