@@ -1,6 +1,37 @@
 #!/bin/bash
 # afreeca stream switcher
 
+
+function quality {
+    echo -e "$1" > ~/.livestreamerrc
+    echo ""
+    cat ~/.livestreamerrc
+    echo ""
+    echo "Modified ~/.livestreamerrc!"
+}
+
+
+# Available streams: audio, high, low, medium, mobile (worst), source (best)
+best="stream-types=hls
+hls-segment-threads=4
+default-stream=best
+player=vlc --cache 5000"
+
+low="stream-types=hls 
+hls-segment-threads=4 
+default-stream=low
+player=vlc --cache 5000"
+
+high="stream-types=hls 
+hls-segment-threads=4 
+default-stream=high
+player=vlc --cache 5000"
+
+medium="stream-types=hls 
+hls-segment-threads=4 
+default-stream=medium
+player=vlc --cache 5000"
+
 # player - afreeca id map
 declare -A players=(
  ["sonic"]="sogodtt"
@@ -110,6 +141,19 @@ while true; do
     curl -s https://afreecabw.appspot.com/ | sed -e '/<tr class="offline show">/,+7d' | awk  -F '[<>]' 'BEGIN {ORS=" "}; /<td / { gsub(/<b>/, ""); sub(/ .*/, "", $3); print $3 } ' | sed s'/  /\n/'g
     echo ""
     continue
+  fi
+  if [[ "$INPUT" == "!high" ]]; then
+      quality "$high"
+      continue
+  elif [[ "$INPUT" == "!medium" ]]; then
+      quality "$medium"
+      continue
+  elif [[ "$INPUT" == "!low" ]]; then
+      quality "$low"
+      continue
+  elif [[ "$INPUT" == "!best" ]]; then
+      quality "$best"
+      continue
   fi
   echo "Playing " ${players[$INPUT]}"..."
   livestreamer --loglevel=error --player="/usr/bin/vlc --file-caching=5000 --network-caching=5000 --meta-title=$INPUT" afreeca.com/${players[$INPUT]} &
