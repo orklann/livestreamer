@@ -1,3 +1,8 @@
+Custom livestreamer fork fixed to work with afreeca streams + 
+`afreeca.sh` script which allows you to quickly search for `!online` 
+players and watch their streams. 
+
+
 Livestreamer
 ============
 
