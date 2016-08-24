@@ -101,7 +101,7 @@ declare -A players=(
 )
 
 while true; do
-  read -p "Set player name: " INPUT
+  read -p "Play stream: " INPUT
   if [[ "$INPUT" == "exit" ]]; then
     exit 0
   fi
@@ -111,6 +111,6 @@ while true; do
     echo ""
     continue
   fi
-  echo "Starting " ${players[$INPUT]}"..."
+  echo "Playing " ${players[$INPUT]}"..."
   livestreamer --loglevel=error --player="/usr/bin/vlc --file-caching=5000 --network-caching=5000 --meta-title=$INPUT" afreeca.com/${players[$INPUT]} &
 done
