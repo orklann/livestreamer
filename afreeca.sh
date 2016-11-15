@@ -6,6 +6,7 @@ QUALITY="best"
 
 # player - afreeca id map
 declare -A players=(
+ ["thrill"]="iahnow2"
  ["horang2"]="horang2"
  ["miso"]="hdy4546"
  ["firebathero"]="firebathero"
